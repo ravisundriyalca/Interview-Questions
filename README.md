@@ -9,6 +9,8 @@ When you type **`https://www.amazon.com`** into your browser and hit Enter, a co
 
 
 
+![image](https://github.com/user-attachments/assets/6d675282-10a3-4595-953d-4495f1b6beaa)
+
 ---
 
 ## **1. DNS Resolution**
