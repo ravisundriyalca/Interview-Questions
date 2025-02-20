@@ -4,6 +4,7 @@
 - [explain how a web request to amazon.com works and is served?](#workflow)
 - [Explain REST request lifecycle](#restflow)
 - [Explain Cookies in HTTP request ](#cookies)
+- [Difference between Web server and Application Server with example](#servers)
 
 ## Workflow
 
@@ -253,6 +254,8 @@ Content-Type: application/json
 
 # How cookies are used for session management
 
+![image](https://github.com/user-attachments/assets/ebda8865-1e32-49d7-b5d2-98ed71f3f033)
+
 **Cookies** are a fundamental mechanism for **session management** in web applications. They allow servers to maintain stateful interactions with clients over the stateless HTTP protocol. Here's a detailed explanation of how cookies are used for session management:
 
 ---
@@ -402,3 +405,132 @@ Content-Type: application/json
 ---
 
 By using cookies for session management, web applications can maintain stateful interactions with clients while leveraging the stateless nature of HTTP. Proper implementation and security measures are essential to protect user sessions and data.
+
+
+
+## Web server and Application Server
+
+The terms **web server** and **application server** are often used interchangeably, but they serve different purposes in the architecture of web applications. Here's a detailed explanation of the differences, along with examples:
+
+
+
+---
+
+## **1. Web Server**
+### **Definition**:
+- A **web server** is a software or hardware system that handles **HTTP requests** and serves **static content** (e.g., HTML, CSS, JavaScript, images) to clients (e.g., browsers).
+- It is designed to deliver web pages and other static resources over the HTTP protocol.
+
+### **Key Features**:
+- Handles **static content**.
+- Supports **HTTP/HTTPS** protocols.
+- Can handle basic **request routing**.
+- Often used as a **reverse proxy** or **load balancer**.
+
+### **Examples**:
+- **Apache HTTP Server**: A popular open-source web server.
+- **Nginx**: A high-performance web server and reverse proxy.
+- **Microsoft IIS**: A web server for Windows-based systems.
+
+### **Use Case**:
+- Serving static files (e.g., a company's homepage or a blog).
+- Acting as a reverse proxy to forward requests to an application server.
+
+---
+
+## **2. Application Server**
+### **Definition**:
+- An **application server** is a software framework that provides an environment for running **dynamic content** and **business logic**.
+- It handles **application-specific tasks** such as database interactions, session management, and complex computations.
+
+### **Key Features**:
+- Executes **dynamic content** (e.g., server-side scripts, business logic).
+- Supports **multiple protocols** (e.g., HTTP, WebSocket, RMI).
+- Provides **middleware services** (e.g., transaction management, security, clustering).
+- Often integrates with **databases** and **messaging systems**.
+
+### **Examples**:
+- **Tomcat**: A Java-based application server for running servlets and JSPs.
+- **JBoss/WildFly**: A Java EE application server.
+- **Node.js**: A runtime environment for building server-side applications.
+- **Microsoft .NET**: A framework for building and running .NET applications.
+
+### **Use Case**:
+- Running a web application with dynamic content (e.g., an e-commerce site or a social media platform).
+- Handling complex business logic and database interactions.
+
+---
+
+## **3. Key Differences**
+
+| Feature                  | Web Server                          | Application Server                  |
+|--------------------------|-------------------------------------|-------------------------------------|
+| **Purpose**              | Serves static content.              | Executes dynamic content and business logic. |
+| **Content Type**         | Static (HTML, CSS, JS, images).     | Dynamic (server-side scripts, APIs). |
+| **Protocols**            | HTTP/HTTPS.                         | HTTP, WebSocket, RMI, etc.          |
+| **Middleware Services**  | Limited or none.                    | Provides middleware services (e.g., transaction management, security). |
+| **Scalability**          | Scales well for static content.     | Scales for dynamic content and complex logic. |
+| **Examples**             | Apache, Nginx, IIS.                 | Tomcat, JBoss, Node.js, .NET.       |
+
+---
+
+## **4. How They Work Together**
+In modern web applications, **web servers** and **application servers** often work together to deliver content to users. Here's an example workflow:
+
+1. **Client Request**:
+   - A user requests a webpage (e.g., `https://example.com/products`).
+
+2. **Web Server**:
+   - The web server (e.g., Nginx) receives the request.
+   - If the request is for static content (e.g., an image or CSS file), the web server serves it directly.
+   - If the request is for dynamic content (e.g., a list of products), the web server forwards the request to the application server.
+
+3. **Application Server**:
+   - The application server (e.g., Tomcat) processes the request.
+   - It executes the necessary business logic (e.g., querying a database for product data).
+   - It generates a dynamic response (e.g., an HTML page with product details).
+
+4. **Response**:
+   - The application server sends the response back to the web server.
+   - The web server forwards the response to the client.
+
+---
+
+## **5. Example Scenario**
+### **Static Content**:
+- **Request**: `GET /styles.css`
+- **Web Server**: Serves the `styles.css` file directly from the file system.
+- **Application Server**: Not involved.
+
+### **Dynamic Content**:
+- **Request**: `GET /products/123`
+- **Web Server**: Forwards the request to the application server.
+- **Application Server**:
+  - Queries the database for product details.
+  - Generates an HTML page with the product information.
+  - Sends the HTML page back to the web server.
+- **Web Server**: Sends the HTML page to the client.
+
+---
+
+## **6. When to Use Which?**
+- **Use a Web Server**:
+  - For serving static content.
+  - As a reverse proxy or load balancer.
+  - For caching and performance optimization.
+
+- **Use an Application Server**:
+  - For running dynamic content and business logic.
+  - For handling database interactions and complex computations.
+  - For providing middleware services (e.g., security, transactions).
+
+---
+
+## **7. Combined Solutions**
+Some servers combine the functionality of both web servers and application servers. For example:
+- **Apache Tomcat**: Can serve static content and run Java-based applications.
+- **Node.js**: Can act as both a web server and an application server.
+
+---
+
+By understanding the differences between web servers and application servers, one can design and deploy web applications more effectively. 
