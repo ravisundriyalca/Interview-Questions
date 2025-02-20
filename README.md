@@ -2,8 +2,9 @@
  
  ## List Of Interview Questions
 - [explain how a web request to amazon.com works and is served?](#workflow)
+- [Explain REST request lifecycle](#restflow)
 
-## Workflow
+# Workflow
 
 When you type **`https://www.amazon.com`** into your browser and hit Enter, a complex series of steps takes place behind the scenes to serve you the Amazon website. Here's a detailed explanation of how a web request to Amazon.com works and is served:
 
@@ -99,5 +100,149 @@ When you type **`https://www.amazon.com`** into your browser and hit Enter, a co
 By following these steps, your browser successfully retrieves and displays the Amazon.com webpage. This process happens in milliseconds, thanks to the highly optimized infrastructure and technologies used by Amazon.
 
 
+
+## Restflow
+
+# A Capable RESTFul Backend
+![image](https://github.com/user-attachments/assets/d417a9ae-21c9-40c2-9872-591d4014b995)
+
+The **REST (Representational State Transfer) request lifecycle** describes the sequence of steps that occur when a client (e.g., a browser or mobile app) sends a request to a RESTful API and receives a response. REST is an architectural style for designing networked applications, and it relies on **HTTP** as the communication protocol. Below is a detailed explanation of the REST request lifecycle:
+
+---
+
+## **1. Client Sends an HTTP Request**
+- The client initiates the process by sending an **HTTP request** to the server.
+- The request includes:
+  - **HTTP Method**: Specifies the action to be performed (e.g., `GET`, `POST`, `PUT`, `DELETE`).
+  - **Endpoint (URL)**: The address of the resource (e.g., `https://api.example.com/users`).
+  - **Headers**: Metadata about the request (e.g., `Content-Type`, `Authorization`).
+  - **Body (Optional)**: Data sent to the server (e.g., JSON or form data for `POST` or `PUT` requests).
+
+**Example Request**:
+```http
+GET /users/123 HTTP/1.1
+Host: api.example.com
+Authorization: Bearer <token>
+Accept: application/json
+```
+
+---
+
+## **2. Server Receives the Request**
+- The server receives the HTTP request and processes it.
+- The server identifies:
+  - The **resource** being requested (e.g., `/users/123`).
+  - The **HTTP method** (e.g., `GET`).
+  - The **headers** and **body** (if present).
+
+---
+
+## **3. Routing and Controller Handling**
+- The server uses a **router** to map the request to the appropriate **controller** or handler.
+- The controller is responsible for processing the request and generating a response.
+
+**Example**:
+- A `GET /users/123` request might be routed to a `UserController` with a `getUser` method.
+
+---
+
+## **4. Business Logic Execution**
+- The controller executes the **business logic** required to fulfill the request.
+- This may involve:
+  - Querying a database.
+  - Calling other services or APIs.
+  - Performing calculations or validations.
+
+**Example**:
+- The `getUser` method queries the database for the user with ID `123`.
+
+---
+
+## **5. Data Access Layer (Optional)**
+- If the request involves data retrieval or manipulation, the server interacts with the **data access layer** (e.g., a database).
+- The data access layer performs operations like:
+  - Fetching data (`SELECT` queries for `GET` requests).
+  - Inserting or updating data (`INSERT` or `UPDATE` queries for `POST` or `PUT` requests).
+  - Deleting data (`DELETE` queries for `DELETE` requests).
+
+---
+
+## **6. Response Generation**
+- Once the business logic is executed, the server generates an **HTTP response**.
+- The response includes:
+  - **Status Code**: Indicates the result of the request (e.g., `200 OK`, `404 Not Found`).
+  - **Headers**: Metadata about the response (e.g., `Content-Type`).
+  - **Body (Optional)**: Data returned to the client (e.g., JSON, XML, or HTML).
+
+**Example Response**:
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+```
+
+---
+
+## **7. Client Receives the Response**
+- The client receives the HTTP response and processes it.
+- The client may:
+  - Display the data (e.g., render a webpage or update a mobile app UI).
+  - Handle errors (e.g., show an error message for a `404 Not Found` response).
+
+---
+
+## **8. Client-Side Rendering or Processing**
+- If the response contains data (e.g., JSON), the client may:
+  - Parse the data and update the user interface.
+  - Store the data locally (e.g., in a browser cache or local storage).
+  - Trigger additional requests (e.g., fetch related resources).
+
+---
+
+## **Key Components of the REST Request Lifecycle**
+1. **Client**: Initiates the request and processes the response.
+2. **Server**: Handles the request, executes business logic, and generates the response.
+3. **HTTP**: The protocol used for communication between the client and server.
+4. **Resource**: The entity being accessed or manipulated (e.g., a user, product, or order).
+5. **Endpoint**: The URL that identifies the resource.
+6. **HTTP Methods**: Define the action to be performed (e.g., `GET`, `POST`, `PUT`, `DELETE`).
+7. **Headers**: Provide metadata about the request or response.
+8. **Body**: Contains data sent to or returned from the server.
+9. **Status Codes**: Indicate the result of the request (e.g., `200 OK`, `404 Not Found`, `500 Internal Server Error`).
+
+---
+
+## **Example Lifecycle for a `GET` Request**
+1. **Client**: Sends a `GET` request to `https://api.example.com/users/123`.
+2. **Server**: Receives the request and routes it to the `UserController`.
+3. **Controller**: Executes the `getUser` method, which queries the database for the user with ID `123`.
+4. **Database**: Returns the user data to the controller.
+5. **Controller**: Generates a response with the user data and a `200 OK` status code.
+6. **Client**: Receives the response and displays the user data.
+
+---
+
+## **Example Lifecycle for a `POST` Request**
+1. **Client**: Sends a `POST` request to `https://api.example.com/users` with a JSON body containing new user data.
+2. **Server**: Receives the request and routes it to the `UserController`.
+3. **Controller**: Executes the `createUser` method, which validates the data and inserts it into the database.
+4. **Database**: Stores the new user data and returns the generated user ID.
+5. **Controller**: Generates a response with the new user ID and a `201 Created` status code.
+6. **Client**: Receives the response and updates the UI to reflect the new user.
+
+---
+
+## **Advantages of REST**
+- **Stateless**: Each request is independent and contains all the information needed to process it.
+- **Scalable**: RESTful APIs can handle a large number of clients and requests.
+- **Cacheable**: Responses can be cached to improve performance.
+- **Uniform Interface**: Uses standard HTTP methods and status codes, making it easy to understand and use.
+
+---
 
 
